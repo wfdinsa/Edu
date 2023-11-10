@@ -44,7 +44,8 @@
                 "--config",
                 "./ui5-local.yaml",
                 "--open",
-                "test/flpSandbox.html#eduproject-display"
+                "test/flpSandbox.html#eduproject-display",
+                "index.html?sap-ui-xx-viewCache=false"
             ],
             "console": "internalConsole",
             "internalConsoleOptions": "openOnSessionStart",

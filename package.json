@@ -11,5 +11,8 @@
     "devDependencies": {
         "mbt": "^1.2.18",
         "rimraf": "^3.0.2"
+    },
+    "dependencies": {
+        "ui5-middleware-cfdestination": "^3.3.11"
     }
 }

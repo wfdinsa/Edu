@@ -29,8 +29,30 @@ server:
       afterMiddleware: compression
       configuration:
         ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - path: /sap
+            url: http://localhost
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
         component: eduproject
         ui5Theme: sap_horizon
+    - name: ui5-middleware-cfdestination
+      afterMiddleware: compression
+      configuration:
+        authenticationMethod: "route"
+        debug: true
+        port: 1092
+        xsappJson: "xs-app.json"
+        destinations:          
+          - name: "LOTTE_SF"
+            url: "https://api50.sapsf.com/odata/v2/"
+            forwardAuthToken: true
+          - name: "ui5"
+            url: "https://ui5.sap.com"
+            forwardAuthToken: false

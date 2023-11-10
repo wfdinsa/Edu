@@ -3,6 +3,13 @@
   "authenticationMethod": "route",
   "routes": [
     {
+      "source": "^/sfsf/(.*)$",
+      "destination": "LOTTE_SF",
+      "target": "$1",
+      "authenticationType": "none",
+      "csrfProtection": false
+    },
+    {
       "source": "^/resources/(.*)$",
       "target": "/resources/$1",
       "authenticationType": "none",

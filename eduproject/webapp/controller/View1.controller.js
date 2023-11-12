@@ -36,6 +36,19 @@ sap.ui.define([
             onChangeGrade: function(oControlEvent){
                 let oModel = this.getView().getModel(); // 뷰에 세팅된 모델 가져와서 보여주기
                 console.log("Change grade:", oModel.getProperty("/condition/grade")); // oModel 내 setData시킨 vModelData를 가져오기.
+            },
+
+            onSearch: function(oControlEvent){
+                let oModel = this.getView().getModel();
+
+                let vResultList = [];
+
+                for(let i=0;i<10;i++){
+                    vResultList.push(({firstName: "길동"+(i+1),lastName: "홍",department:"IS팀",grade:"A급"}));
+                }
+
+                oModel.setProperty("/resultList", vResultList);
+
             }
         });
     });

@@ -7,11 +7,11 @@
                 <HBox >
                     <VBox width="25%">
                         <Label text="name" required="true" />
-                        <Input type="Text" value="" width="100%"></Input>
+                        <Input type="Text" value="{/condition/name}" width="100%"></Input>
                     </VBox>
                     <VBox width="25%">
                         <Label text="Department" required="true" />
-                        <Input type="Text" value="" width="100%"></Input>
+                        <Input type="Text" value="{/condition/department}" width="100%"></Input>
                     </VBox>
                     <VBox width="25%">
                         <Label text="Grade" required="false" />
@@ -25,7 +25,7 @@
                     </VBox>
                     <VBox width="25%">
                         <Label text="" required="false" />
-                        <Button type="Accept" text="Search" icon="sap-icon://search" ></Button>
+                        <Button type="Accept" text="Search" icon="sap-icon://search" press="onSearch"></Button>
                     </VBox>
                 </HBox>
             </Panel>
@@ -37,18 +37,39 @@
                         <Label text="Result" design="Bold"></Label>
                     </OverflowToolbar>
                 </headerToolbar>
-                <t:Table selectionMode="None">
+                <t:Table selectionMode="None" 
+                    visibleRowCount="20" 
+                    noData ="Nothing Data..." 
+                    rows="{/resultList}" >
                     <t:columns>
                         <t:Column>
                             <Label text="First Name"/>
                             <t:template>
-                                <Text text="" />
+                                <Text text="{firstName}" />
                             </t:template>
                         </t:Column>
                         <t:Column>
                             <Label text="Last Name"/>
                             <t:template>
-                                <Text text="" />
+                                <Text text="{lastName}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Display Name"/>
+                            <t:template>
+                                <Text text="{lastName} {firstName}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Department"/>
+                            <t:template>
+                                <Text text="{department}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Grade"/>
+                            <t:template>
+                                <Text text="{grade}" />
                             </t:template>
                         </t:Column>
                     </t:columns>

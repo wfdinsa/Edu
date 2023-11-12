@@ -1,12 +1,13 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel", // 다른 컨트롤들을 사전 정의를 해두는 곳
-    "sap/m/MessageBox" // onDelete
+    "sap/m/MessageBox", // onDelete
+    'sap/ui/core/Fragment'
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,JSONModel,MessageBox) {
+    function (Controller,JSONModel,MessageBox,Fragment) {
         "use strict";
 
         return Controller.extend("eduproject.controller.View1", {
@@ -68,6 +69,47 @@ sap.ui.define([
 
                //삭제하시겠습니까 message box만들기
                MessageBox.confirm(oContext.sPath + " 번째 데이터를 삭제하시겠습니까?");
-           }
+            },
+
+            onHelp: function(oControlEvent){
+                // create dialog lazily
+                if (!this.pDialog) {
+                    this.pDialog = this.loadFragment({
+                        name: "eduproject.view.fragment.Help" // project이름
+                    });
+                } 
+                // open dialog
+                this.pDialog.then(function(oDialog) {
+                    oDialog.open();
+                });
+            },
+            onCloseHelp: function(oControlEvent){
+                // this.byId("helloDialog").close(); 이번에는 this.pDialog를 선언했으니까 다른 방식으로 해보자
+                if(this.pDialog){
+                    this.pDialog.then(function(oDialog){
+                        oDialog.close();
+                    })
+                }
+            },
+            onPopOver: function (oEvent) {
+                var oButton = oEvent.getSource(),
+                    oView = this.getView();
+    
+                // create popover
+                if (!this._pPopover) {
+                    this._pPopover = Fragment.load({
+                        id: oView.getId(),
+                        name: "eduproject.view.fragment.HelpPopOver",
+                        controller: this
+                    }).then(function(oPopover) {
+                        oView.addDependent(oPopover);
+                        // oPopover.bindElement("/ProductCollection/0");
+                        return oPopover;
+                    });
+                }
+                this._pPopover.then(function(oPopover) {
+                    oPopover.openBy(oButton);
+                });
+            }
         });
     });

@@ -1,0 +1,26 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core" >
+    <!-- property인 escapeHandler는 dialog는 esc누르면 꺼지도록 되어있는데 안되게 해야할 경우가 있다. 그럴 때 reject를 return하게 해주면 된다. -->
+    <Dialog title="Help" contentHeight="300px" contentWidth="500px" draggable="true" resizable="true">
+        <Panel >
+            <Text text="무엇을 도와 드릴까요?"/>
+        </Panel>
+        <endButton>
+            <Button text="Close" press="onCloseHelp"/>
+        </endButton>
+        <!-- endbutton과 footer는 공존불가 맨 마지막거만 살아있을거임 -->
+        <!-- <footer>
+            <OverflowToolbar>
+                <ToolbarSpacer/>
+                <Button text="Accept" type="Accept" />
+                <Button text="Reject" type="Reject" />
+                <Button text="Edit" />
+            </OverflowToolbar>
+        </footer> -->
+        <!-- 반면 beginButton은 endButton과 공존가능 -->
+        <beginButton>
+            <Button text="Accept" type="Accept" />
+        </beginButton>
+    </Dialog>
+</core:FragmentDefinition>

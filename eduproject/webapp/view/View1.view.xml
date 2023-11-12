@@ -15,12 +15,13 @@
                     </VBox>
                     <VBox width="25%">
                         <Label text="Grade" required="false" />
-                        <Select>
-                                <core:Item key="S" text="수석" />
-                                <core:Item key="M" text="책임" />
-                                <core:Item key="SA" text="대리" />
-                                <core:Item key="A" text="사원" />
-                        </Select>
+                        <Select width="100%" selectedKey="{/condition/grade}" change="onChangeGrade"
+                             items="{path : '/gradeList', templateShareable:true}">
+                            <!--얘는 core라서 위에 xmlns:core="sap.ui.core" 이거 추가해줘야한다.-->
+                            <items>
+                                <core:Item key="{code}" text="{text}"/>
+                            </items>
+                        </Select>   
                     </VBox>
                     <VBox width="25%">
                         <Label text="" required="false" />

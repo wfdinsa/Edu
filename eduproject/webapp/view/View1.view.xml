@@ -76,7 +76,7 @@
                         <t:Column>
                             <Label text="Action"/>
                             <t:template>
-                                <Button icon="sap-icon://delete" type="Transparent"/>
+                                <Button icon="sap-icon://delete" type="Transparent" press="onDelete"/>
                             </t:template>
                         </t:Column>
                     </t:columns>

@@ -1,11 +1,12 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel" // 다른 컨트롤들을 사전 정의를 해두는 곳
+    "sap/ui/model/json/JSONModel", // 다른 컨트롤들을 사전 정의를 해두는 곳
+    "sap/m/MessageBox" // onDelete
 ],
     /**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller,JSONModel) {
+    function (Controller,JSONModel,MessageBox) {
         "use strict";
 
         return Controller.extend("eduproject.controller.View1", {
@@ -49,6 +50,23 @@ sap.ui.define([
 
                 oModel.setProperty("/resultList", vResultList);
 
-            }
+            },
+
+            onDelete: function(oControlEvent){
+                // 클릭한 delete icon을 가져오고, 그 icon의 바인딩 정보를 가져올거다.
+               let oControl = oControlEvent.getSource();
+
+               let oContext = oControl.getBindingContext();
+
+               console.log("Context is ", oContext); // sPath라는 정보를 통해서 row의 정보를 알 수 있다.
+
+               let oModel = this.getView().getModel();
+
+               console.log("Selected Row Data is ", oModel.getProperty(oContext.sPath));
+               console.log("Selected Row Data is ", oModel.getProperty(oContext.sPath)['firstName']);
+
+               //삭제하시겠습니까 message box만들기
+               MessageBox.confirm(oContext.sPath + " 번째 데이터를 삭제하시겠습니까?");
+           }
         });
     });

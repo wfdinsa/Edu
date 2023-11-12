@@ -7,24 +7,25 @@
                 <HBox >
                     <VBox width="25%">
                         <Label text="name" required="true" />
-                        <Input type="Text" value="" width="100%"></Input>
+                        <Input type="Text" value="{/condition/name}" width="100%"></Input>
                     </VBox>
                     <VBox width="25%">
                         <Label text="Department" required="true" />
-                        <Input type="Text" value="" width="100%"></Input>
+                        <Input type="Text" value="{/condition/department}" width="100%"></Input>
                     </VBox>
                     <VBox width="25%">
                         <Label text="Grade" required="false" />
-                        <Select>
-                                <core:Item key="S" text="수석" />
-                                <core:Item key="M" text="책임" />
-                                <core:Item key="SA" text="대리" />
-                                <core:Item key="A" text="사원" />
-                        </Select>
+                        <Select width="100%" selectedKey="{/condition/grade}" change="onChangeGrade"
+                             items="{path : '/gradeList', templateShareable:true}">
+                            <!--얘는 core라서 위에 xmlns:core="sap.ui.core" 이거 추가해줘야한다.-->
+                            <items>
+                                <core:Item key="{code}" text="{text}"/>
+                            </items>
+                        </Select>   
                     </VBox>
                     <VBox width="25%">
                         <Label text="" required="false" />
-                        <Button type="Accept" text="Search" icon="sap-icon://search" ></Button>
+                        <Button type="Accept" text="Search" icon="sap-icon://search" press="onSearch"></Button>
                     </VBox>
                 </HBox>
             </Panel>
@@ -36,18 +37,62 @@
                         <Label text="Result" design="Bold"></Label>
                     </OverflowToolbar>
                 </headerToolbar>
-                <t:Table selectionMode="None">
+                <t:Table selectionMode="None" 
+                    rowMode="Fixed" 
+                    noData ="Nothing Data..." 
+                    rows="{/resultList}"
+                    enableCellFilter="true" 
+                    alternateRowColors="true"
+                    enableColumnFreeze="true" >
                     <t:columns>
-                        <t:Column>
-                            <Label text="First Name"/>
+                    <!-- sortProperty를 통해서 sort할 column을 정할 수 있다. 문법이 특이함. 얘는 그냥 {}없이 firstName이 들어가네 -->
+                        <!-- multiLabel 활용해보기 -->
+                        <!-- headerSpan을 사용해야지 위에 컬럼이 합쳐져서 보이게된다.-->
+                        <t:Column width="20%" hAlign="Center" sortProperty="firstName" filterProperty="firstName" headerSpan="2"> 
+                            <t:multiLabels>
+                                <Label text="Name" textAlign="Center" width="100%"/>
+                                <Label text="First Name"/>
+                            </t:multiLabels>
                             <t:template>
-                                <Text text="" />
+                                <Text text="{firstName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column width="20%" hAlign="Center" sortProperty="firstName" filterProperty="firstName" headerSpan="2"> 
+                            <t:multiLabels>
+                                <Label text="Name" textAlign="Center" width="100%"/>
+                                <Label text="Last Name"/>
+                            </t:multiLabels>
+                            <t:template>
+                                <Text text="{lastName}"/>
+                            </t:template>
+                        </t:Column>
+                        <!-- 바인딩 된 데이터를 이렇게 활용할 수도 있다. -->
+                        <t:Column >
+                            <Label text="Display Name"/>
+                            <t:template>
+                                <!-- <Text text="{lastName}{firstName}"/> -->
+                                <Text text="{
+                                    parts: [{path: 'lastName'},{path:'firstName'}],
+                                    formatter: '.NameFormat'
+                                    }"/>
                             </t:template>
                         </t:Column>
                         <t:Column>
-                            <Label text="Last Name"/>
+                            <Label text="Department"/>
                             <t:template>
-                                <Text text="" />
+                                <Text text="{department}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Grade"/>
+                            <t:template>
+                                <Text text="{grade}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Action"/>
+                            <t:template>
+                                <Button icon="sap-icon://delete" type="Transparent" press="onDelete"/>
                             </t:template>
                         </t:Column>
                     </t:columns>

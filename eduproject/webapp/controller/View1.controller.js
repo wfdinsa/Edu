@@ -29,7 +29,8 @@ sap.ui.define([
                 }
 
                 oModel.setData(vModelData);
-
+                
+                //바인딩을 하기위해서 setModel을 해줘야한다.
                 this.getView().setModel(oModel);
 
             },

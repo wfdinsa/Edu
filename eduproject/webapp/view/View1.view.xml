@@ -40,25 +40,41 @@
                 <t:Table selectionMode="None" 
                     rowMode="Fixed" 
                     noData ="Nothing Data..." 
-                    rows="{/resultList}" >
+                    rows="{/resultList}"
+                    enableCellFilter="true" 
+                    alternateRowColors="true"
+                    enableColumnFreeze="true" >
                     <t:columns>
                     <!-- sortProperty를 통해서 sort할 column을 정할 수 있다. 문법이 특이함. 얘는 그냥 {}없이 firstName이 들어가네 -->
-                        <t:Column width="40%" hAlign="Center" sortProperty="firstName" filterProperty="firstName" resizable="false">                            
-                            <Label text="First Name"/>
+                        <!-- multiLabel 활용해보기 -->
+                        <!-- headerSpan을 사용해야지 위에 컬럼이 합쳐져서 보이게된다.-->
+                        <t:Column width="20%" hAlign="Center" sortProperty="firstName" filterProperty="firstName" headerSpan="2"> 
+                            <t:multiLabels>
+                                <Label text="Name" textAlign="Center" width="100%"/>
+                                <Label text="First Name"/>
+                            </t:multiLabels>
                             <t:template>
                                 <Text text="{firstName}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column >
-                            <Label text="Last Name"/>
+                        <t:Column width="20%" hAlign="Center" sortProperty="firstName" filterProperty="firstName" headerSpan="2"> 
+                            <t:multiLabels>
+                                <Label text="Name" textAlign="Center" width="100%"/>
+                                <Label text="Last Name"/>
+                            </t:multiLabels>
                             <t:template>
                                 <Text text="{lastName}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column>
+                        <!-- 바인딩 된 데이터를 이렇게 활용할 수도 있다. -->
+                        <t:Column >
                             <Label text="Display Name"/>
                             <t:template>
-                                <Text text="{lastName} {firstName}" />
+                                <!-- <Text text="{lastName}{firstName}"/> -->
+                                <Text text="{
+                                    parts: [{path: 'lastName'},{path:'firstName'}],
+                                    formatter: '.NameFormat'
+                                    }"/>
                             </t:template>
                         </t:Column>
                         <t:Column>

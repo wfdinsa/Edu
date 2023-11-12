@@ -38,20 +38,21 @@
                     </OverflowToolbar>
                 </headerToolbar>
                 <t:Table selectionMode="None" 
-                    visibleRowCount="20" 
+                    rowMode="Fixed" 
                     noData ="Nothing Data..." 
                     rows="{/resultList}" >
                     <t:columns>
-                        <t:Column>
+                    <!-- sortProperty를 통해서 sort할 column을 정할 수 있다. 문법이 특이함. 얘는 그냥 {}없이 firstName이 들어가네 -->
+                        <t:Column width="40%" hAlign="Center" sortProperty="firstName" filterProperty="firstName" resizable="false">                            
                             <Label text="First Name"/>
                             <t:template>
-                                <Text text="{firstName}" />
+                                <Text text="{firstName}"/>
                             </t:template>
                         </t:Column>
-                        <t:Column>
+                        <t:Column >
                             <Label text="Last Name"/>
                             <t:template>
-                                <Text text="{lastName}" />
+                                <Text text="{lastName}"/>
                             </t:template>
                         </t:Column>
                         <t:Column>
@@ -70,6 +71,12 @@
                             <Label text="Grade"/>
                             <t:template>
                                 <Text text="{grade}" />
+                            </t:template>
+                        </t:Column>
+                        <t:Column>
+                            <Label text="Action"/>
+                            <t:template>
+                                <Button icon="sap-icon://delete" type="Transparent"/>
                             </t:template>
                         </t:Column>
                     </t:columns>

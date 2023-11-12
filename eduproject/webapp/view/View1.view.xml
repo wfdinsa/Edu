@@ -30,6 +30,10 @@
                             <Button type="Emphasized" text="Help" tooltip="Show Help Message !!!" press="onHelp" icon="sap-icon://sys-help"/>
                         </HBox>
                     </VBox>
+                    <VBox width="25%" class="sapUiMediumMarginEnd" justifyContent="End" alignItems="End">
+                        <Label text="" required="false"/>
+                        <Button type="Emphasized" text="Help" tooltip="Show Help Message !!!" press="onPopOver" icon="sap-icon://sys-help"/>
+                    </VBox>
                 </HBox>
             </Panel>
             <Panel expanded="false" expandable="false" headerText="검색결과" width="auto" class="sapUiResponsiveMargin">

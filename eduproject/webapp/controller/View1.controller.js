@@ -84,14 +84,32 @@ sap.ui.define([
                 });
             },
             onCloseHelp: function(oControlEvent){
-                // note: We don't need to chain to the pDialog promise, since this event-handler
-                // is only called from within the loaded dialog itself.
                 // this.byId("helloDialog").close(); 이번에는 this.pDialog를 선언했으니까 다른 방식으로 해보자
                 if(this.pDialog){
                     this.pDialog.then(function(oDialog){
                         oDialog.close();
                     })
                 }
+            },
+            onPopOver: function (oEvent) {
+                var oButton = oEvent.getSource(),
+                    oView = this.getView();
+    
+                // create popover
+                if (!this._pPopover) {
+                    this._pPopover = Fragment.load({
+                        id: oView.getId(),
+                        name: "eduproject.view.fragment.HelpPopOver",
+                        controller: this
+                    }).then(function(oPopover) {
+                        oView.addDependent(oPopover);
+                        // oPopover.bindElement("/ProductCollection/0");
+                        return oPopover;
+                    });
+                }
+                this._pPopover.then(function(oPopover) {
+                    oPopover.openBy(oButton);
+                });
             }
         });
     });

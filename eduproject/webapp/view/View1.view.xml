@@ -109,6 +109,7 @@
         <footer>
             <OverflowToolbar>
 				<ToolbarSpacer/>
+                <!-- gotoView2 함수를 통해 View2로 라우팅 -->
 				<Button text="Accept" type="Accept" press="gotoView2" />
 				<Button text="Reject" type="Reject" />
 				<Button text="Edit" />

@@ -110,6 +110,14 @@ sap.ui.define([
                 this._pPopover.then(function(oPopover) {
                     oPopover.openBy(oButton);
                 });
+            },
+            gotoView2: function(oEvent){
+                // this는 controller 컨트롤러는 sap/ui/core/mvc/Controller이다.
+                // router는 UIComponent에서 가져오는거니까.
+                let oRouter = this.getOwnerComponent().getRouter();
+                // 이름은 manifest.json에 들어가있는 route의 name을 넣으면 된다.
+                oRouter.navTo("RouteView2");
+
             }
         });
     });

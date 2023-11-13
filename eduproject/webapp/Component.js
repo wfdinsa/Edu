@@ -29,6 +29,10 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+
+                // enable routing View2를 보여주기 위해 UIComponent를 초기화 해야 페이지 라우팅이 가능하다.
+                // https://ui5.sap.com/1.120.1/#/api/sap.ui.core.UIComponent%23methods/getRouter
+                this.getRouter().initialize();
             }
         });
     }

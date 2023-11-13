@@ -3,9 +3,57 @@
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns:core="sap.ui.core" 
     xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:f="sap.ui.layout.form"
     xmlns:l="sap.ui.layout">
-    <Page id="View2" title="페이지 2">
+    <!-- showNavButton="true" back버튼 만들기, navButtonPress back버튼 기능지정 -->
+    <Page id="View2" title="페이지 2" showNavButton="true" navButtonPress="gotoView1">
         <content>
-            <Label text="test"/> 
+            <VBox class="sapUiSmallMargin">
+            <!-- labelspan XL L M S <- 컨셉인데 S가 12로 등분한다는거고 MLXL은 동일하다. -->
+                <f:SimpleForm id="SimpleFormChange354"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title="Address"
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12" 
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="2"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false" >
+                    <f:content>
+                        <Label text="Name" />
+                        <Input id="name" value="{SupplierName}" />
+                        <Label text="Street/No." />
+                        <Input value="{Street}">
+                        </Input>
+                        <Input value="{HouseNumber}">
+                            <layoutData>
+                                <l:GridData span="XL1 L2 M2 S4" />
+                            </layoutData>
+                        </Input>
+                        <Label text="ZIP Code/City" />
+                        <Input value="{ZIPCode}">
+                            <layoutData>
+                                <l:GridData span="XL1 L2 M2 S4" />
+                            </layoutData>
+                        </Input>
+                        <Input value="{City}" />
+                        <Label text="Country" />
+                        <Select id="country" selectedKey="{Country}">
+                            <items>
+                                <core:Item text="England" key="England"/>
+                                <core:Item text="Germany" key="Germany"/>
+                                <core:Item text="USA" key="USA"/>
+                            </items>
+                        </Select>
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
         </content>
     </Page>
 </mvc:View>
